@@ -338,7 +338,7 @@ google.html의 body
 
  함수도 2개 
 
-```
+```python
 @app.route('/bonbon')
 def input_name():
     return render_template('bonbon.html')
@@ -348,14 +348,18 @@ def input_name():
 def result_char():
     personality = ['돈복', '외모', '운', '인성', '민첩', '힘', '지능']
     ran = range(1,11)
-    j = 0
+    
+    boxes={}
     name_bon = request.args.get('data')
-    personality_random = random.sample(personality,3)
-    ran_random = random.sample(ran, 3)
-    return render_template('bon.html', name = name_bon, personality = personality_random, ran = ran_random, j = j)
+    for i in range(3):
+        boxes[random.choice(personality)] = random.choice(ran)
+
+    return render_template('bon.html', name = name_bon, boxes = boxes)
 ```
 
-```
+bonbon.html
+
+```html
 <body>
     <form action="/bonbonpong">
         <input type="text", name = "data">
@@ -364,12 +368,14 @@ def result_char():
 </body>
 ```
 
-```
+bon.html
+
+```html
 <body>
     <h1>신은 {{name}}님에게  </h1>
-    {% for i in personality %}
-        <h2>{{i}} 는 {{ran[j]}} 만큼 줬습니다.</h2>
-        {% j = j+1%}
+    {% for key, value in boxes.items() %}
+        <h2>{{key}} 는  {{value}}만큼 줬습니다.</h2>
+        
     {% endfor %}
 </body>
 ```
