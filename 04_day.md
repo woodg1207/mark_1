@@ -348,9 +348,8 @@ def input_name():
 def result_char():
     personality = ['돈복', '외모', '운', '인성', '민첩', '힘', '지능']
     ran = range(1,11)
-    
     boxes={}
-    name_bon = request.args.get('data')
+    name_bon = request.args.get('data')##html의 data정보를 받아온다.
     for i in range(3):
         boxes[random.choice(personality)] = random.choice(ran)
 
@@ -654,8 +653,16 @@ else:
 출력예시)
 박나율
 """
+#	같은 표현이다. 
 print(ssafy.get('classes').get('dj').get('class president'))
-   
+##key값이 class president 까지 가서 거기의 value값을 갖고옴
+for key, name in ssafy.get('classes').get('dj').items():
+    #dj까지 접근 후 key값이 class~인것을 찾고 찾으면 value값을 프린트하도록 코딩함
+    if 'class president' == key:
+        print(name)
+        
+
+
 
 """
 난이도*** 4. ssafy에서 배우는 언어들을 출력하세요.
@@ -718,7 +725,7 @@ def lotto_check():
 @app.route('/lotto_result')
 def lotto_result():
     #회차번호를 받아와야한다. 
-    num = request.args.get('num')
+    num = request.args.get('num') ##html에서 num을 받아옴
     #동행복권에 요청을 보내 응답을 받는다. 
     res = requests.get(f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={num}')
     #json형태로 바꿔준다. (우리가 크롬에서 보고있는 결과와 동일한 모습)
