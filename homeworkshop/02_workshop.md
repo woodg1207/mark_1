@@ -19,12 +19,14 @@ student = {
     'django' : 89,
     'flask' : 83
 }
-sum = 0
+sum1 = 0
 cnt = 0
 for point in student.values():
     cnt += 1
-    sum += point
-print(sum/cnt)
+    sum1 += point
+print(sum1/cnt)
+#####
+sum(student.values())/len(student)
 ```
 
 ###### 3.다음은 여러 사람의 혈액형() 에 대한 데이터 이다. 반복문을 사용하여 key 는 혈액형의 종류, value는 인원수인 딕셔너리를 만들고 출력하시오.
